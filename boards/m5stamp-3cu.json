@@ -1,0 +1,29 @@
+{
+  "build": {
+    "arduino": {
+      "ldscript": "esp32c3_out.ld"
+    },
+    "core": "esp32",
+    "extra_flags": "-DARDUINO_M5STACK_STAMP_C3U",
+    "f_cpu": "160000000L",
+    "f_flash": "80000000L",
+    "flash_mode": "dio",
+    "mcu": "esp32c3",
+    "variant": "esp32c3"
+  },
+  "connectivity": ["wifi", "bluetooth"],
+  "debug": {
+    "openocd_target": "esp32c3.cfg"
+  },
+  "frameworks": ["arduino", "espidf"],
+  "name": "M5Stack Stamp C3U",
+  "upload": {
+    "flash_size": "4MB",
+    "maximum_ram_size": 327680,
+    "maximum_size": 4194304,
+    "require_upload_port": true,
+    "speed": 460800
+  },
+  "url": "https://docs.m5stack.com/en/core/stamp_c3u",
+  "vendor": "M5Stack"
+}

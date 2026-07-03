@@ -1,0 +1,24 @@
+case '?' : // Request parameters
+case 'A' : // CYD  Very definable way to write to screen
+case 'B' : // Blue led
+case 'D' : // Send mqtt on value change
+case 'C' : // CYD  Clear screen dark
+case 'F' : // CYD  Most used command to write in predefined variables in according areas
+case 'G' : // Green led
+case 'I' : // CYD  Set intensity of display
+case 'I' : // Read input
+case 'L' : // All led's in one
+case 'M' : // CYD  Used to write the predefined menue texts
+case 'O' : // Serialprint I2C device and IO pin direction list
+case 'Q' : // CYD  Used to write the predefined menue texts 
+case 'Q' : // Write output
+case 'R' : // Red led
+case 'S' : // CYD  Start screen
+case 'T' : // CYD  Posibility to write on every position of screen in free format
+case 'U' : // CYD  Clear screen light grey
+case 'U' : // Set new update rate 
+case 'V' : // CYD  Draw only the frame
+case 'W' : // CYD  Static menue & dynymic text to screen
+case 'X' : // Remote RESTART
+case 'Y' : // CYD  Switch touch testmode via mqtt
+case 'Z' : // CYD  Show all fields in touch
