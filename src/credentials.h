@@ -26,7 +26,6 @@ IPAddress gateway(1,1,1,1);                // REPLACE !!!!
 #define mqtt_port      1883
 #define WiFi_timeout    101                           // How many times to try before give up
 #define mqtt_timeout     11                           // How many times to try before try Wifi reconnect
-
 // MQTT Topics
 #define mytype          "esp/M5-WEI-"                   // Client Typ
 #define iamclient       mytype MyIP                     // Client name 
@@ -39,10 +38,17 @@ IPAddress gateway(1,1,1,1);                // REPLACE !!!!
 #define out_loop        iamclient "/loop"               // This helper debug variable can be send to MQTT
 #define mqtt_out_sen    iamclient ""                   // This is sensor data placeholder to send to MQTT
 
+const char *mqtt_out_weight[4] = {
+    iamclient "/ext_weight/0", // This is send to MQTT
+    iamclient "/ext_weight/1", // This is send to MQTT
+    iamclient "/ext_weight/2", // This is send to MQTT
+    iamclient "/ext_weight/3"  // This is send to MQTT
+};
+
 // Errors send as values in test mode
 // error =  -7
 // error =  -6 
-// error =  -5    HX71x not available
+// error =  -5
 // error =  -4    No DS18B20 sensors
 // error =  -3    DHT Humidity sensor not read
 // error =  -2    DHT Temperatur sensor not read
@@ -58,12 +64,11 @@ int LEDbrightness =          96;                        // Brightness of the mod
 #define DHTtyp   DHT22  
 
 // See above
-const char HX71x_Typ[]  =       {'W','W','W','B'};      // Typ of HX Sensor W= weight / B= pressure
-const long HX71x_OFFSET[]  =    {0,0,0,0};              // Offset compensation
-const long HX71x_DIVIDER[] =    {1,1,1,1};              // Chip sensitivity
-long HX71x_DELTA[] =            {0,0,0,0};              // Basic sensitivity trigger to send new value via mqtt
+const long HX711_OFFSET[]  =    {0,0,0,0};         // Tara compensation
+const long HX711_DIVIDER[] =    {1,1,1,1};              // Scale sensitivity
+long HX711_DELTA[] =            {0,0,0,0};              // Basic sensitivity to send new mqtt value
 
-#define HXcount   4                                     // How many HX71x are active. Max 4 forseen 
+#define HXcount   4                                     // How many HX711 are active. Max 4 forseen 
 #define INcount   1                                     // How many Inputs are active. Max 5 forseen (Automatic restricted = 5 - HXcount)
 #define OUTcount  1                                     // How many Inputs are active. Max 5 forseen (Automatic restricted = 5 - HXcount -INcount)
 
@@ -74,7 +79,7 @@ long HX71x_DELTA[] =            {0,0,0,0};              // Basic sensitivity tri
 // Enable the prepart sensors
 #define enableDHT                                       // Enable DHT T&H sensor      
 #define enableDS                                        // Enable multiple DS18 T sensors      
-#define enableHX                                        // Enable HX71x sensors      
+#define enableHX                                        // Enable HX711 weight sensors      
 #define enableIN                                        // Enable inputs     
 #define enableOUT                                       // Enable outputs    
 

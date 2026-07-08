@@ -20,7 +20,7 @@
 // static const uint8_t G20 / = 20;    Rx not used for programming
 // static const uint8_t G21 / = 21;    Tx not used for programming
 
-//#define Me      // If defined ( Me .. MeIOT .. Rhy ) use private network for testing, otherwise use IOT standard
+#define Me      // If defined ( Me .. MeIOT .. Rhy ) use private network for testing, otherwise use IOT standard
 //#define TEST    // Testmodus
 #define OTA     // If defined use OTA programming posibility
 
@@ -55,17 +55,18 @@ PubSubClient mqttclient;                      // MQTT protokol handler
 #define LED_PIN         2             // Used for ON BOARD LED
 #define RESTART_PIN     9             // BOOT pin = Press on top-switch to restart
 
-#define DS_PIN         10             // Digital pin G10 on M5-C3U  read data from the DS18B20 sensors
-#define DHT_POWER      18             // Digital pin D-  on M5-C3U  to supply power to the DHT sensor
-#define DHT_PIN        19             // Digital pin D+  on M5-C3U  read data from the DHT sensor
+#define DS_PIN          1             // Digital pin G1  on M5-C3U  read data from the DS18B20 sensors
+#define DHT_POWER      19             // Digital pin D+  on M5-C3U  to supply power to the DHT sensor
+#define DHT_PIN        18             // Digital pin D-  on M5-C3U  read data from the DHT sensor
 
 #define SCK             3             // Digital pin G3  on M5-C3U  connect clock for all HX71x
 #define DT1             4             // Digital pin G4  on M5-C3U  connect data for 1. HX71x
 #define DT2             5             // Digital pin G5  on M5-C3U  connect data for 2. HX71x
 #define DT3             6             // Digital pin G6  on M5-C3U  connect data for 3. HX71x
 #define DT4             7             // Digital pin G7  on M5-C3U  connect data for 4. HX71x
+#define DT5            10             // Digital pin G10 on M5-C3U  connect data for 5. HX71x
 
-const uint8_t DT[] = {4, 5, 6, 7}; 
+const uint8_t DT[] = {4, 5, 6, 7,10}; 
 const uint8_t IO[] = {0, 1, 7, 6, 5}; 
 
 //#define IN0             0             // Port A pin G0   on M5-C3U  connect as 1.input 

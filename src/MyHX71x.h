@@ -9,11 +9,11 @@ long raw = 0;
 String numh;
 
 #include <HX711.h>
-HX711 HXread[HXcount];                                       // Array for HX71x chips 
+HX711 HXread[HXcount];                                // Array for HX71x chips 
 
 // HXread Arrays
-const uint8_t DAT[] = {DT1, DT2, DT3, DT4};
-const uint8_t CLK_PIN[] = {SCK, SCK, SCK, SCK};       // Same pin for all
+const uint8_t DAT[] = {DT1, DT2, DT3, DT4, DT5};
+const uint8_t CLK_PIN[] = {SCK, SCK, SCK, SCK, SCK};  // Same pin for all
 long HXLastsend[HXcount];                             // This variable remembers the last send measurement
 
 void startHX() {
