@@ -371,9 +371,17 @@ void callback(char* topic, uint8_t* payload, unsigned int length) {
         sendOUT();
       #endif
       break;    }
+    case 'T' : {                                                                // Set tara
+      int Va = 0;
+      Va = x2i(receivedChar,1,1);
+      #if defined(enableHX)                                                    // Set HX71x tara values
+        settara(Va);
+        sendHXtara();
+      #endif
+      break;    }
     case 'U' :  {                                                               // Received from mqtt new update rate 
       int Va = x2i(receivedChar,1,2);                                             
-      if (Va <= 5){ Va = 5; };
+      if (Va <= 3){ Va = 3; };
       Sendme = "Update :" + String(Va);
       mqttclient.publish(out_status, (String(Sendme).c_str()), false);          // Send the sensor update rate
       readinterval = Va *  500;
@@ -392,7 +400,11 @@ void callback(char* topic, uint8_t* payload, unsigned int length) {
         //delay(1000);
       #endif
       break;
-    }         
+    } 
+      // DIRTY TRICK to read all mqtt's fast if they are stacked
+  // This overwrites the normal mqtt request timing by simulating an "older" timestamp
+  prevRMQTTMillis = currentMillis - (readinterval - 250); // But at least 250ms before retrigger
+     
   }
 }
 
@@ -416,7 +428,7 @@ void readvalues() {
     MySensors = "";
     readIO();
   #endif
-    MySensors += String(numsensors) + "xS-> ";
+  MySensors += String(numsensors) + "xSen-> ";
 
 #if defined(enableDHT)          // Sensor reading DHT
     readDHT();   

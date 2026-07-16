@@ -40,13 +40,13 @@ void readDHT(){
       led.show();
     #endif
     statusreset = true;
-    digitalWrite(DHT_POWER, LOW);                 // Reset DHT via power
-    delay(1000);                                   // Give sensor time
-    digitalWrite(DHT_POWER, HIGH);                // Initialize DHT via power
+    digitalWrite(DHT_POWER, LOW);                     // Reset DHT via power
+    delay(1000);                                      // Give sensor time
+    digitalWrite(DHT_POWER, HIGH);                    // Initialize DHT via power
     }
   else{ 
     // Publish temperature readings with unique MQTT topics per sensor
-    String numh = String(DTHmynumtemp -1);              // Starting mqtt at /0
+    String numh = String(DTHmynumtemp -1);            // Starting mqtt at /0
     String topic = String(mqtt_out_sen) + "/temp/" + numh;
     mqttclient.publish(topic.c_str(), String(temp).c_str(), false);
     MySensors += "DHT<t" + numh;
@@ -69,7 +69,7 @@ void readDHT(){
     }
   else
     {
-    // Correct sensor selfwarming and impossible humidity > 100%
+    // Correct sensor impossible humidity > 100%
     if (hum >= 100){
       hum = 100;
     }

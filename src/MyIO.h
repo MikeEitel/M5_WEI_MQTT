@@ -38,7 +38,6 @@ void showIO() {
 #endif
 }
 
-
 void startIO(){
   int IOoff = 0;                    // Offset if Inputs are defined
   #if defined(enableIN)             // If on the same pin input is defined it has priority
@@ -82,8 +81,6 @@ void readIO(){
     MySensors += i;
   }
   MySensors += "> + ";
-
-  //digitalWrite(IO[myout[0]], !digitalRead(IO[myout[0]]));
 }
 
 void fastIN(){

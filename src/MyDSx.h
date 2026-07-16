@@ -64,7 +64,6 @@ void readDS(){
         Serial.print(addr[i], HEX);
       }
       Serial.println();
-      //dscounter++;
     #else
       // Serial.print(".");
     #endif

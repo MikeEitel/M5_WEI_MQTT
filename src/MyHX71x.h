@@ -50,6 +50,35 @@ void startHX() {
   }
 }
 
+void settara(int hx){
+  #if defined(TEST)
+    Serial.printf("Tara set HX: %i\n", hx);
+  #endif
+  if (hx <= HXcounted-1){
+    HXread[hx].tare();
+  } 
+  else {
+    Sendme = "Not existing HX71x " + String(hx);
+    Serial.println(Sendme);
+    mqttclient.publish(out_status, (String(Sendme).c_str()), false); 
+  }
+}
+
+void sendHXtara(){
+  #if defined(TEST)
+    Serial.print("Status ");
+    for (int i = 0; i < IOmynumout; i++){
+      Serial.printf("Out%i(%i)= %i\t", i, myout[i], digitalRead(myout[i]));
+    }
+    Serial.println();
+  #endif   
+  for (int i = 0; i < HXcounted; i++) {
+    String numh = String(i);
+    String topic = String(mqtt_out_sen) + "/qual/" + numh;
+    mqttclient.publish(topic.c_str(), String(HXread[i].get_offset()).c_str(), false);
+  }
+}
+
 void sendHX2mqtt(char HXtyp){
   if(HXtyp=='W'){
     String topic = String(mqtt_out_sen) + "/weight/" + numh;
@@ -61,10 +90,6 @@ void sendHX2mqtt(char HXtyp){
   }
 }
  
-//      if(HX71x_Typ[i]=='W'){ numweight++; }
-//      else { numpress++; }
-
-
 void readHX(){
   if ( HXcounted > 0){
     MySensors += "HX<";
@@ -102,13 +127,7 @@ void readHX(){
         led.show();
       #endif
     }
-
-    #if defined(TEST)
-      //Serial.printf("DHT T: %f C\tF: %f %%\n",temp , hum);
-    #endif
-
     delay(10);                                          // Give cpu time to update watchdog
   } 
   MySensors += "> ";  
 }
-
